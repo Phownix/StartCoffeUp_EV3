@@ -187,7 +187,7 @@ main #contacto article:last-of-type a{
     margin: inherit;
 }
 
-main #contacto article form input, main #contacto article form textarea{
+main form input, main form textarea, main form button, main form select{
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -195,8 +195,9 @@ main #contacto article form input, main #contacto article form textarea{
     border-radius: .2rem;
     outline: none;
     border: none;
-    background-color: #d0d0d0;
-    color: #181818;
+    border: 1px solid #d0d0d040;
+    background-color: transparent;
+    color: white;
 }
 
 main #contacto article form label{

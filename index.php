@@ -1,3 +1,10 @@
+<?php 
+    date_default_timezone_set('America/Santiago'); 
+    include "./db.php";
+
+    $sql = "SELECT * FROM form";
+    $result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +44,58 @@
             </ul>
         </div>
     </nav>
+
     <main>
+        <form action="/send.php" method="post">
+            <input type="text" name="date" id="date" value='<?php echo date("Y-m-d H:i:s"); ?>'>
+            <h1>Formulario de Reclamo y Felicitaciones</h1>
+            <div class="box">
+                <label for="firts_name">Nombre</label>
+                <label for="last_name">Apellido</label>
+                <input type="text" name="firts_name" id="firts_name">
+                <input type="text" name="last_name" id="last_name">
+            </div>
 
+            <div class="box">
+                <label for="id_rut">RUT</label>
+                <label for="type">Tipo</label>
+                <input type="text" max='9' name="id_rut" id="id_rut">
+                <select name="type" id="type">
+                    <option value="_">-- Seleccionar Uno --</option>
+                    <option value="great">Felicitaciones</option>
+                    <option value="bad">Reclamo</option>
+                </select>
+            </div>
+
+            <label for="desc">Descripcion</label>
+            <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+
+            <button>Enviar</button>
+        </form>
+
+        <section class='list'>
+            <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<div class='card ".$row['type']."'>
+                            <div class='header'>
+                                ".$row['firts_name']." ".$row['last_name']."
+
+                                <span class='rut'>".$row['id_rut']."</span>
+                                <span class='date'>".$row['datr']."</span>
+                            </div>
+                            <div class='body'>
+                                ".$row['descr']."
+                            </div>
+                        </div>";
+                    }
+                } else {
+                    echo "0 results";
+                }
+                  $conn->close();
+            ?>
+        </section>
     </main>
-
     <footer>
         Creado por un Inacapino <br>
         &copy; StartCoffeUp 2023
