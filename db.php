@@ -3,12 +3,14 @@
 $servername = '127.0.0.1';
 $username = 'root';
 $password = '123456';
-$dbname = 'coffe';
+$dbname = 'coff1e';
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-if (mysqli_connect_errno()) {
-    printf("Error de conexión: %s\n", mysqli_connect_error());
-    exit();
+try {
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+} catch (\Throwable $th) {
+    if (mysqli_connect_errno()) {
+        printf("Error de conexión: %s\n", mysqli_connect_error());
+        exit();
+    }
 }
 ?>
